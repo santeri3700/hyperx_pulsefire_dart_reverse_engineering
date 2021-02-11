@@ -15,3 +15,6 @@ The codename for the newer NGenuity software is "NGenuity2", so that could perha
 
 # Protocol documentation
 - [Index](protocol/index.md)
+
+# Packet captures
+- [Index](captures/index.md)
