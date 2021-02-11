@@ -42,20 +42,20 @@ These packets are sent by NGenuity.
 | ------ | ------ | ------ |
 | 0x00 | 0xD4 | Send button assignment |
 | 0x01 | 0x** | Physical button <br><ul><li>0x00 = Left click </li><li>0x01 = Right click </li><li>0x02 = Middle click </li><li>0x03 = Side button forward </li><li>0x04 = Side button back </li><li>0x05 = DPI Toggle </li></ul> |
-| 0x02 | 0x** | Assignment type <br><ul><li>0x01 = Mouse functions (USB HID Button Page 0x09) </li><li>0x02 = Keyboard functions (USB HID Keyboard Page 0x07) </li><li>0x03 = Media functions (Non-standard codes) </li><li>0x07 = Unknown/DPI Switch function(s) </li></ul> |
+| 0x02 | 0x** | Assignment type <br><ul><li>0x01 = Mouse functions (USB HID Button Page 0x09) </li><li>0x02 = Keyboard functions (USB HID Keyboard Page 0x07) </li><li>0x03 = Media functions (Non-standard codes) </li><li>0x04 = Macro function </li><li>0x07 = Unknown/DPI Switch function(s) </li></ul> |
 | 0x03 | 0x02 | 2 bytes after byte index 0x03 |
 | 0x00 | 0x** | Assignment code or USB HID Usage ID <br><b>More information in "Button assignment codes" section</b> |
-| 0x00 | 0x04 | Unknown. Seems to always be 0x04 |
+| 0x00 | 0x04 | Unknown. Seems to always be 0x04 except on macro function where the value is 0x00 |
 
-## Set macro info
+## Set macro assignment
 <b>Must be sent immediately after last packet of macro data </b>
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
-| 0x00 | 0xD5 | Set macro info |
+| 0x00 | 0xD5 | Set macro assignment |
 | 0x01 | 0x** | Physical button <br><ul><li>0x02 = Middle click </li><li>0x03 = Side button forward </li><li>0x04 = Side button back </li><li>0x05 = DPI Toggle </li></ul> |
 | 0x02 | 0x00 | Unknown |
 | 0x03 | 0x05 | 5 bytes after byte index 0x03 |
-| 0x04 | 0x06 | Number of macro events |
+| 0x04 | 0x** | Number of macro events (0x01-0xFF?) |
 | 0x05 | 0x00 | Unknown |
 | 0x06 | 0x00 | Unknown |
 | 0x07 | 0x00 | Unknown |
@@ -70,11 +70,11 @@ First 4 bytes are reserved and rest are used for the macro data (6 * 10 bytes = 
 | ------ | ------ | ------ |
 | 0x00 | 0xD6 | Set macro data |
 | 0x01 | 0x** | Physical button <br><ul><li>0x02 = Middle click </li><li>0x03 = Side button forward </li><li>0x04 = Side button back </li><li>0x05 = DPI Toggle </li></ul> |
-| 0x02 | 0x00 | Unknown |
-| 0x03 | 0x** | Number of macro events
+| 0x02 | 0x00 | Unknown. Changes when the amount on macro events is more than 6 in total. |
+| 0x03 | 0x** | Number of macro events(?). Unknown when more than 6 macro events in total.
 | 0x04-0x40 | 10 byte macro events, each starting with `1A`
 
-Example macro event:
+### Example macro events 1:
 
 1. Key 1 down for  100ms (64 00 = 0x0064 = 100ms)
 2. Key 1   up for  255ms (FF 00 = 0x00FF = 255ms)
@@ -83,6 +83,12 @@ Example macro event:
 5. Key 3 down for  100ms
 6. Key 3   up for  255ms
 
+First 4 bytes:
+| Set macro data | Physical button | Unknown | Number of macro events/Unknown |
+| ------ | ------ | ------ | ------ |
+| D6 | 04 | 00 | 06 |
+
+Tailing 60-byte macro data:
 | Macro event | Unknown | Key/00=Key up | Unknown | Unknown | Unknown | Unknown | Unknown | Delay upper byte | Delay lower byte |
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | 1A | 00 | 1E | 00 | 00 | 00 | 00 | 00 | 64 | 00 |
@@ -91,6 +97,75 @@ Example macro event:
 | 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | D2 | 04 |
 | 1A | 00 | 20 | 00 | 00 | 00 | 00 | 00 | 64 | 00 |
 | 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+
+### Example macro events 2:
+
+##### (PART 1/3)
+- Key 1 down for 255ms
+- Key 1   up for 255ms
+- Key 2 down for 255ms
+- Key 2   up for 255ms
+- Key 3 down for 255ms
+- Key 3   up for 255ms
+
+First 4 bytes:
+| Set macro data | Physical button | Unknown | Number of macro events/Unknown |
+| ------ | ------ | ------ | ------ |
+| D6 | 04 | 00 | 06 |
+
+Tailing 60-byte macro data:
+| Macro event | Unknown | Key/00=Key up | Unknown | Unknown | Unknown | Unknown | Unknown | Delay upper byte | Delay lower byte |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 1A | 00 | 1E | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 1F | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 20 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+
+##### (PART 2/3)
+- Key 4 down for 255ms
+- Key 4   up for 255ms
+- Key 5 down for 255ms
+- Key 5   up for 255ms
+- Key 6 down for 255ms
+- Key 6   up for 255ms
+
+First 4 bytes:
+| Set macro data | Physical button | Unknown | Number of macro events/Unknown |
+| ------ | ------ | ------ | ------ |
+| D6 | 04 | 01 | 86 |
+
+Tailing 60-byte macro data:
+| Macro event | Unknown | Key/00=Key up | Unknown | Unknown | Unknown | Unknown | Unknown | Delay upper byte | Delay lower byte |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 1A | 00 | 21 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 22 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 23 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+
+##### (PART 3/3)
+- Key 7 down for 255ms
+- Key 7   up for 255ms
+
+First 4 bytes:
+| Set macro data | Physical button | Unknown | Number of macro events/Unknown |
+| ------ | ------ | ------ | ------ |
+| D6 | 04 | 03 | 02 |
+
+Tailing 60-byte macro data:
+| Macro event | Unknown | Key/00=Key up | Unknown | Unknown | Unknown | Unknown | Unknown | Delay upper byte | Delay lower byte |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 1A | 00 | 24 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | FF | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+| 1A | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+
+---
 
 ## Save settings to hardware
 | Byte index | Value | Description |
