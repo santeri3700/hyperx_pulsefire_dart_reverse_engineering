@@ -13,8 +13,17 @@ The mouse is only compatible with the newer version of [HyperX NGenuity](https:/
 
 The codename for the newer NGenuity software is "NGenuity2", so that could perhaps be used as the protocol name.
 
-# Protocol documentation
+## Protocol documentation
 - [Index](protocol/index.md)
 
-# Packet captures
+## Packet captures
 - [Index](captures/index.md)
+
+# License
+[![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
+
+The contents of this repository are licensed with 
+[Creative Commons — CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) license unless explicitly stated otherwise. Zero rights reserved.
+
+Kingston®, HyperX® & HyperX Pulsefire Dart™ are registered trademarks of Kingston Technology Corporation. <br>
+This project is not affiliated with or endorsed by Kingston Technology Corporation.
