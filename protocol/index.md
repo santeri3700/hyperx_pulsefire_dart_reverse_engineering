@@ -61,7 +61,7 @@ These packets are sent by NGenuity.
 | 0x07 | 0x00 | Unknown |
 | 0x08 | 0x00 | Unknown |
 
-# Set macro data
+## Set macro data
 Macro data can contain a maximum of 6 events each packet because each packet must not exceed 64 bytes. <br>
 Each macro event contains the key code and delay which defines how long the mouse should wait before executing the next macro event in the macro data. <br>
 First 4 bytes are reserved and rest are used for the macro data (6 * 10 bytes = 60 bytes).
@@ -107,6 +107,7 @@ Example macro event:
 
 # Receive
 These packets are sent by the mouse (sometimes requires a heartbeat request).
+
 ## Heartbeat (regular)
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
