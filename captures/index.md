@@ -12,9 +12,13 @@
   - [PCAPNG](ngenuity_button_assignment_side_button_back_macro_2.pcapng)
   - [TXT](ngenuity_button_assignment_side_button_back_macro_2.txt)
   
-- Packets from NGenuity's macro assigment settings. The following capture contains a 10 event long (split to 2 packets) mouse function macro sequence for the side button back.
+- Packets from NGenuity's macro assignment settings. The following capture contains a 10 event long (split to 2 packets) mouse function macro sequence for the side button back.
   - [PCAPNG](ngenuity_button_assignment_side_button_back_macro_3.pcapng)
   - [TXT](ngenuity_button_assignment_side_button_back_macro_3.txt)
+  
+- Packets from NGenuity's macro assignment settings. The following capture contains a 64 event long (split to 11 packets) keyboard function macro sequence for the side button back.
+  - [PCAPNG](ngenuity_macro_example_multiple_packets_1.pcapng)
+  - [TXT](ngenuity_macro_example_multiple_packets_1.pcapng)
 
 - Packets from NGenuity and the mouse while charging the mouse from 57% to 100% battery.
   - [PCAPNG](ngenuity_battery_heartbeats_57_to_100.pcapng)
