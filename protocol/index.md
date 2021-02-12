@@ -173,6 +173,11 @@ Tailing 60-byte macro data:
 | 0x00 | 0xDE | Save? |
 | 0x01 | 0xFF | Unknown/profile(s)? |
 
+## Get mouse information
+| Byte index | Value | Description |
+| ------ | ------ | ------ |
+| 0x00 | 0x50 | Get mouse information |
+
 ## Get heartbeat
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
@@ -181,12 +186,49 @@ Tailing 60-byte macro data:
 <br>
 
 # Receive
-These packets are sent by the mouse (sometimes requires a heartbeat request).
+These packets are sent by the mouse ("reports" require a request first, "events" come directly from the mouse without a request).
 
-## Heartbeat (regular)
+## Report: Mouse information
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
-| 0x00 | 0x51 | Heartbeat |
+| 0x00 | 0x50 | Mouse information report |
+| 0x01 | 0x00 | Unknown |
+| 0x02 | 0x00 | Unknown |
+| 0x03 | 0x1d | Unknown |
+| 0x04 | 0xe2 | Unknown |
+| 0x05 | 0x16 | Unknown |
+| 0x06 | 0x51 | Unknown |
+| 0x07 | 0x09 | Unknown |
+| 0x08 | 0x08 | Unknown |
+| 0x09 | 0x00 | Unknown |
+| 0x0a | 0x01 | Unknown |
+| 0x0b | 0x01 | Unknown |
+| 0x0c | 0x48 | H |
+| 0x0d | 0x79 | y |
+| 0x0e | 0x70 | p |
+| 0x0f | 0x65 | e |
+| 0x10 | 0x72 | r |
+| 0x11 | 0x58 | X |
+| 0x12 | 0x20 | (space) |
+| 0x13 | 0x50 | P |
+| 0x14 | 0x75 | u |
+| 0x15 | 0x6c | l |
+| 0x16 | 0x73 | s |
+| 0x17 | 0x65 | e |
+| 0x18 | 0x66 | f |
+| 0x19 | 0x69 | i |
+| 0x1a | 0x72 | r |
+| 0x1b | 0x65 | e |
+| 0x1c | 0x20 | (space) |
+| 0x1d | 0x44 | D |
+| 0x1e | 0x61 | a |
+| 0x1f | 0x72 | r |
+| 0x20 | 0x74 | t |
+
+## Report: Heartbeat
+| Byte index | Value | Description |
+| ------ | ------ | ------ |
+| 0x00 | 0x51 | Heartbeat report |
 | 0x01 | 0x00 | Unknown/padding |
 | 0x02 | 0x00 | Unknown/padding |
 | 0x03 | 0x03 | 3 bytes after byte index 0x03 |
@@ -198,24 +240,17 @@ These packets are sent by the mouse (sometimes requires a heartbeat request).
 | 0x08 | 0x02 | Unknown |
 | 0x09 | 0x40 | Unknown |
 
-## Event: Mouse going to suspend? Unverified!
+## Event: Mouse state change
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
 | 0x00 | 0xff | Generic event |
 | 0x01 | 0x03 | Unknown |
-
-## Event: Button event
-| Byte index | Value | Description |
-| ------ | ------ | ------ |
-| 0x00 | 0xff | Generic event |
-| 0x01 | 0x03 | Unknown |
-| 0x02 | 0x** | Profile number (0x00-0x04) |
-| 0x03 | 0x01 | Unknown |
-| 0x04 | 0x01 | Unknown |
+| 0x02 | 0x** | Active profile number (0x00-0x04) |
+| 0x03 | 0x** | <ul><li>0x00 = USB cable NOT connected / NOT charging </li><li>0x01 = USB cable connected / Charging </li></ul> |
+| 0x04 | 0x** | <ul><li>0x00 = Sleep </li><li>0x01 = Awake </li></ul> |
 | 0x05 | 0x00 | Unknown |
-| 0x06 | 0x** | <ul><li>0x00 = Not pressed</li> <li>0x02 = Profile button</li></ul> |
-| 0x07 | 0x** | <ul><li>0x00 = Not pressed</li> <li>0x01 = Left click</li> <li>0x02 = Right click</li> <li>0x04 = Middle click</li> <li>0x08 = Page up/Mouse 4</li> <li>0x10 = Page down/Mouse 5</li> |
-
+| 0x06 | 0x** | <ul><li>0x00 = No button(s) pressed / Button(s) up</li> <li>0x02 = DPI toggle button</li></ul> |
+| 0x07 | 0x** | <ul><li>0x00 = Not buttons pressed</li> <li>0x01 = Left click</li> <li>0x02 = Right click</li> <li>0x04 = Middle click</li> <li>0x08 = Side button forward</li> <li>0x10 = Side button back</li> |
 <br>
 
 ---
