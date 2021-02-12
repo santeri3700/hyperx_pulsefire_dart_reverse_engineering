@@ -28,14 +28,16 @@ These packets are sent by NGenuity.
 | 0x0A | 0x64 | Brightness <br><ul><li>Min: 0x64 (DEC: 100) </li><li>Max: 0x00 (DEC: 0)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
 | 0x0B | 0x00 | Effect speed <br><b>ONLY APPLIES TO NON-STATIC MODES!</b> <br><ul><li>Min: 0x40 (DEC: 64) </li><li>Max: 0x00 (DEC: 0)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
 
-## Select DPI profile
+## Set DPI profile count/selection/color/DPI value
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
 | 0x00 | 0xD3 | Send DPI profile |
-| 0x01 | 0x00 | 0x00 = Select DPI profile <br>0x03 = Set DPI profile effect color |
+| 0x01 | 0x** | Mode <br><ul><li>0x00 = Select DPI profile </li><li>0x01 = Set DPI profile amount </li><li>0x02 = Set DPI value </li><li>0x03 = Set DPI change effect color </li></ul> |
 | 0x02 | 0x00 | Unknown |
-| 0x03 | 0x01 | 1 byte after byte index 0x03 |
-| 0x04 | 0x01 | Profile number (0x00-0x04) |
+| 0x03 | 0x** | <ul><li>Mode 0x00 & 0x01 -> 0x01 = 1 byte after byte index 0x03 (Active profile) </li><li>Mode 0x03 -> 0x03 = 3 bytes after byte index 0x03 (R, G ,B) </li></ul> |
+| 0x04 | 0x** | <ul><li>Mode 0x00 = Set active profile number (0x00-0x04) </li><li>Mode 0x01 = Set amount of saved profiles (1=0x01, 2=0x03, 3=0x07, 4=0x0F, 5=0x1F) </li><li>Mode 0x03 = RED</ul> |
+| 0x05 | 0x** | Mode 0x03 = GREEN |
+| 0x06 | 0x** | Mode 0x03 = BLUE |
 
 ## Set button assignment
 | Byte index | Value | Description |
