@@ -71,8 +71,8 @@ First 4 bytes are reserved and rest are used for the macro data (6 * 10 bytes = 
 | 0x00 | 0xD6 | Set macro data |
 | 0x01 | 0x** | Physical button <br><ul><li>0x02 = Middle click </li><li>0x03 = Side button forward </li><li>0x04 = Side button back </li><li>0x05 = DPI Toggle </li></ul> |
 | 0x02 | 0x00 | Unknown. Changes when the amount on macro events is more than 6 in total. |
-| 0x03 | 0x** | Number of macro events(?). Unknown when more than 6 macro events in total.
-| 0x04-0x40 | 10 byte macro events, each starting with `1A`
+| 0x03 | 0x** | Number of macro events(?). Unknown when more than 6 macro events in total. |
+| 0x04-0x40 | 10 byte macro events | Each event starts with <br>`1A` (for keyboard functions) <br>or <br>`25` (for mouse functions) |
 
 ### Example macro events 1:
 
