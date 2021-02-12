@@ -17,7 +17,7 @@ These packets are sent by NGenuity.
 | ------ | ------ | ------ |
 | 0x00 | 0xD2 | Send LED |
 | 0x01 | 0x20 | LED number <br><ul><li>0x00 = Scroll wheel </li><li>0x10 = Logo </li><li>0x20 = Both</li></ul> |
-| 0x02 | 0x00 | Effect mode <br><ul><li>0x00 = Static color </li><li>0x12 = Spectrum Cycle </li><li>0x20 = Breathing </li><li>0x30 = Trigger Fade</li></ul> |
+| 0x02 | 0x00 | Effect mode <br><ul><li>0x00 = Static color </li><li>0x10 = Unofficial Spectrum Cycle (works when 0x12 doesn't) <li>0x12 = Spectrum Cycle </li><li>0x20 = Breathing </li><li>0x30 = Trigger Fade</li></ul> |
 | 0x03 | 0x08 | 8 bytes after byte index 0x03 |
 | 0x04 | 0xAA | RED |
 | 0x05 | 0xBB | GREEN |
@@ -189,6 +189,7 @@ Tailing 60-byte macro data:
 These packets are sent by the mouse ("reports" require a request first, "events" come directly from the mouse without a request).
 
 ## Report: Mouse information
+The Window software reported the mouse as "HyperX Pulsefire Dart - Firmware v4.1.0.4"
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
 | 0x00 | 0x50 | Mouse information report |
