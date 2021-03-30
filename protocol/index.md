@@ -191,7 +191,6 @@ Tailing 60-byte macro data:
 These packets are sent by the mouse ("reports" require a request first, "events" come directly from the mouse without a request).
 
 ## Report: Mouse information
-The Window software reported the mouse as "HyperX Pulsefire Dart - Firmware v4.1.0.4"
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
 | 0x00 | 0x50 | Mouse information report |
