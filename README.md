@@ -5,7 +5,7 @@ Reverse engineering material for the Kingston HyperX Pulsefire Dart Wireless Gam
 
 The HyperX Pulsefire Dart Wireless Gaming Mouse enumerates at 0951:16E1 (wireless) and 0951:16E2 (wired) and uses URB_INTERRUPT for control. Messages are 64 bytes long and zero-filled.
 
-My unit has the following firmware versions reported by the Windows software:
+My unit (HX-MC006B 3500457-001.B00LF) has the following firmware versions reported by the Windows software:
 - Wireless firmware v4.1.0.4 (Possibly just the wireless dongle firmware)
 - Wired    firmware v1.1.0.8 (Possibly the actual mouse firmware)
 
