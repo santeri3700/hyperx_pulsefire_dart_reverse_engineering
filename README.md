@@ -6,8 +6,9 @@ Reverse engineering material for the Kingston HyperX Pulsefire Dart Wireless Gam
 The HyperX Pulsefire Dart Wireless Gaming Mouse enumerates at 0951:16E1 (wireless) and 0951:16E2 (wired) and uses URB_INTERRUPT for control. Messages are 64 bytes long and zero-filled.
 
 My unit (HX-MC006B 3500457-001.B00LF) has the following firmware versions reported by the Windows software:
-- Wireless firmware v4.1.0.4 (Possibly just the wireless dongle firmware)
-- Wired    firmware v1.1.0.8 (Possibly the actual mouse firmware)
+- Wireless firmware v4.1.0.4 (Wireless dongle firmware)
+- Wired    firmware v1.1.0.8 (Mouse firmware)
+
 These values seem to be the same (each digit split by dot) as in bcdDevice USB device descriptor value. <br>
 
 Check firmware versions on Linux: `cat $(egrep -l '16e1|16e2' /sys/bus/usb/devices/usb*/*/idProduct | sed 's/idProduct/bcdDevice/g')`
