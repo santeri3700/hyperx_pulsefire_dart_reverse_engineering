@@ -1,5 +1,8 @@
 # HyperX Gaming Mouse protocol documentation (NGenuity2 protocol)
 
+Usage page: 0xFF13 (wired), 0xFF00 (wireless) <br>
+Interface: 1 (wired), 2 (wireless) <br>
+
 # Send
 These packets are sent by NGenuity.
 
