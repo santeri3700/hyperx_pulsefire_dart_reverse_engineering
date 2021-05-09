@@ -21,6 +21,10 @@ The mouse is only compatible with the newer version of [HyperX NGenuity](https:/
 
 The codename for the newer NGenuity software is "NGenuity2", so that could perhaps be used as the protocol name.
 
+## HIDAPI example code
+- [example.c](misc/example.c) <br>
+`gcc -Ihidapi -lhidapi-hidraw example.cpp -o example && ./example 255 128 64`
+
 ## Protocol documentation
 - [Index](protocol/index.md)
 
