@@ -19,7 +19,7 @@ These packets are sent by NGenuity.
 | Byte index | Value | Description |
 | ------ | ------ | ------ |
 | 0x00 | 0xD2 | Send LED |
-| 0x01 | 0x20 | LED number <br><ul><li>0x00 = Scroll wheel </li><li>0x10 = Logo </li><li>0x20 = Both</li></ul> |
+| 0x01 | 0x20 | LED number <br><ul><li>0x00 = Logo </li><li>0x10 = Scroll wheel </li><li>0x20 = Both</li></ul> |
 | 0x02 | 0x00 | Effect mode <br><ul><li>0x00 = Static color </li><li>0x10 = Unofficial Spectrum Cycle (works when 0x12 doesn't) <li>0x12 = Spectrum Cycle </li><li>0x20 = Breathing </li><li>0x30 = Trigger Fade</li></ul> |
 | 0x03 | 0x08 | 8 bytes after byte index 0x03 |
 | 0x04 | 0xAA | RED |
@@ -28,8 +28,8 @@ These packets are sent by NGenuity.
 | 0x07 | 0xAA | RED (doesn't seem to affect anything) |
 | 0x08 | 0xBB | GREEN (doesn't seem to affect anything) |
 | 0x09 | 0xCC | BLUE (doesn't seem to affect anything) |
-| 0x0A | 0x64 | Brightness <br><ul><li>Min: 0x64 (DEC: 100) </li><li>Max: 0x00 (DEC: 0)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
-| 0x0B | 0x00 | Effect speed <br><b>ONLY APPLIES TO NON-STATIC MODES!</b> <br><ul><li>Min: 0x40 (DEC: 64) </li><li>Max: 0x00 (DEC: 0)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
+| 0x0A | 0x64 | Brightness <br><ul><li>Min: 0x00 (DEC: 0) </li><li>Max: 0x64 (DEC: 100)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
+| 0x0B | 0x00 | Effect speed <br><b>ONLY APPLIES TO NON-STATIC MODES!</b> <br><ul><li>Min: 0x64 (DEC: 100) </li><li>Max: 0x00 (DEC: 0)</li> <li>Step: 0x01 (DEC: 1)</li></ul> |
 
 ## Set DPI profile count/selection/color/DPI value
 | Byte index | Value | Description |
